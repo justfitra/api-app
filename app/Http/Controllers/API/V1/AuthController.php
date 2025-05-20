@@ -107,4 +107,18 @@ class AuthController extends Controller
             ->success($success)
             ->respond();
     }
+
+    public function logout(Request $request)
+    {
+
+        Auth::guard('web')->logout();
+
+        $request->user()->currentAccessToken()->delete();
+
+        return responder()
+            ->success([
+                'message' => 'Logout Success'
+            ])
+            ->respond();
+    }
 }
